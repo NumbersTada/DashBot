@@ -146,10 +146,10 @@ def commands(level):
       uploadGJComment(un,pw,f"Commands: /info, /ai (input), /diceroll, /coinflip, /8ball (question) (page 1/3, /help2, /help3)",perc,level)
       print(f"help1 executed by {u}: {com}")
   elif(com.startswith("/help2")):
-      uploadGJComment(un,pw,f"Commands: /fart, /poll (input), /cool, /owoify (input) (/help1, page 2/3, /help3)",perc,level)
+      uploadGJComment(un,pw,f"Commands: /fart, /poll (option1), (option2), /cool, /owoify (input) (/help1, page 2/3, /help3)",perc,level)
       print(f"help2 executed by {u}: {com}")
   elif(com.startswith("/help3")):
-      uploadGJComment(un,pw,f"Commands: /rickroll (username), /stats (username) (/help1, /help2, page 3/3)",perc,level)
+      uploadGJComment(un,pw,f"Commands: /rickroll (username), /stats (username), /likeif (input) (/help1, /help2, page 3/3)",perc,level)
       print(f"help3 executed by {u}: {com}")
   elif(com.startswith("/info")):
       uploadGJComment(un,pw,f"Version 1.1 is running. Use /cmdinfo and then the command name to see how to use. Example: /cmdinfo 8ball",perc,level)
@@ -221,14 +221,24 @@ def commands(level):
       uploadGJComment(un,pw,f"INFO: /diceroll will write a random number between 1 and 6.",perc,level)
       print(f"cmdinfo executed by {u}: {com}")
   elif(com.startswith("/poll")):
-     c=com.split("/poll '")
+     c=com.split("/poll ")
      cc=c[1]
-     d=com.split("/poll '" + cc + "' '")
+     d=cc.split(", ")
      dd=d[1]
-     uploadGJComment(un,pw,f"POLL by {u}: Like = '{cc}', Dislike = '{cc}'",perc,level)
+     ccc=cc.split(", " + dd)
+     cccc=ccc[0]
+     uploadGJComment(un,pw,f"POLL by {u}: Like = {cccc}, Dislike = {dd}",perc,level)
      print(f"poll executed by {u}: {com}")
   elif(com.startswith("/cmdinfo poll")):
-      uploadGJComment(un,pw,f"INFO: /poll will write a message with the options you added. ALWAYS enclose your options with '",perc,level)
+      uploadGJComment(un,pw,f"INFO: /poll will write a message with the options you added. (separate options with ,)",perc,level)
+      print(f"cmdinfo executed by {u}: {com}")
+  elif(com.startswith("/likeif")):
+     c=com.split("/likeif ")
+     cc=c[1]
+     uploadGJComment(un,pw,f"Like if {cc}",perc,level)
+     print(f"likeif executed by {u}: {com}")
+  elif(com.startswith("/cmdinfo likeif")):
+      uploadGJComment(un,pw,f"INFO: /likeif will post a like if comment with your input.",perc,level)
       print(f"cmdinfo executed by {u}: {com}")
   elif(com.startswith("/fart")):
      uploadGJComment(un,pw,f"@{u} farddddddddddddddd",perc,level)
