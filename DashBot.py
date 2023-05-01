@@ -110,7 +110,7 @@ print("| |  | | __ _ ___| |__ | |_) | ___ | |_ ")
 print("| |  | |/ _` / __| '_ \|  _ < / _ \| __|")
 print("| |__| | (_| \__ \ | | | |_) | (_) | |_ ")
 print("|_____/ \__,_|___/_| |_|____/ \___/ \__|")
-print("v1.0")
+print("v1.1")
 
 
 un = input("Username: ")
@@ -143,21 +143,27 @@ def commands(level):
     uploadGJComment(un,pw,f"{u}, {cc}",perc,level)
     print(f"owoify executed by {u}: {com}")
   elif(com.startswith("/help1")):
-      uploadGJComment(un,pw,f"Commands: /ai (input), /diceroll, /coinflip, /8ball (question), /fart (page 1/3, /help2, /help3)",perc,level)
+      uploadGJComment(un,pw,f"Commands: /info, /ai (input), /diceroll, /coinflip, /8ball (question) (page 1/3, /help2, /help3)",perc,level)
       print(f"help1 executed by {u}: {com}")
   elif(com.startswith("/help2")):
-      uploadGJComment(un,pw,f"Commands: /poll (input), /cool, /owoify (input) (/help1, page 2/3, /help3)",perc,level)
+      uploadGJComment(un,pw,f"Commands: /fart, /poll (input), /cool, /owoify (input) (/help1, page 2/3, /help3)",perc,level)
       print(f"help2 executed by {u}: {com}")
   elif(com.startswith("/help3")):
       uploadGJComment(un,pw,f"Commands: /rickroll (username), /stats (username) (/help1, /help2, page 3/3)",perc,level)
       print(f"help3 executed by {u}: {com}")
+  elif(com.startswith("/info")):
+      uploadGJComment(un,pw,f"Version 1.1 is running. Use /cmdinfo and then the command name to see how to use. Example: /cmdinfo 8ball",perc,level)
+      print(f"info executed by {u}: {com}")
   elif(com.startswith("/stats")):
      c=com.split("/stats ")
      cc=c[1]
      shtats=loads(requests.get(f"http://gdbrowser.com/api/profile/{cc}").text)
      ccc=f"@{u}, {c[1]} has {shtats['stars']} Stars, {shtats['diamonds']} Diamonds, {shtats['coins']} Coins, {shtats['userCoins']} User Coins, {shtats['demons']} Demons and {shtats['cp']} Creator Points."
      uploadGJComment(un,pw,f"{ccc}",perc,level)
-     print(f"stats executed by {u}: {com}")                                  
+     print(f"stats executed by {u}: {com}")
+  elif(com.startswith("/cmdinfo stats")):
+      uploadGJComment(un,pw,f"INFO: /stats will write the stats of the specified user.",perc,level)
+      print(f"cmdinfo executed by {u}: {com}")
   elif(com.startswith("Im")):
      c=com.split("Im ")
      cc=c[1]
@@ -190,31 +196,54 @@ def commands(level):
      balls = random.choice(eightball)
      uploadGJComment(un,pw,f"@{u}, the Magic 8 Ball says: {balls}",perc,level)
      print(f"8ball executed by {u}: {com}")
+  elif(com.startswith("/cmdinfo 8ball")):
+      uploadGJComment(un,pw,f"INFO: /8ball will write a random answer.",perc,level)
+      print(f"cmdinfo executed by {u}: {com}")
   elif(com.startswith("/cool")):
      cool=random.randint(0,100)
      uploadGJComment(un,pw,f"@{u}, you are {cool}% cool!",perc,level)
      print(f"cool executed by {u}: {com}")
+  elif(com.startswith("/cmdinfo cool")):
+      uploadGJComment(un,pw,f"INFO: /cool will show how cool are you in percents.",perc,level)
+      print(f"cmdinfo executed by {u}: {com}")
   elif(com.startswith("/coinflip")):
      flip=random.choice(coin)
      uploadGJComment(un,pw,f"@{u}, {flip}",perc,level)
      print(f"coinflip executed by {u}: {com}")
+  elif(com.startswith("/cmdinfo coinflip")):
+      uploadGJComment(un,pw,f"INFO: /coinflip will say Heads or Tails randomly.",perc,level)
+      print(f"cmdinfo executed by {u}: {com}")
   elif(com.startswith("/diceroll")):
      roll=random.randint(1,6)
      uploadGJComment(un,pw,f"@{u}, {roll}",perc,level)
      print(f"diceroll executed by {u}: {com}")
+  elif(com.startswith("/cmdinfo diceroll")):
+      uploadGJComment(un,pw,f"INFO: /diceroll will write a random number between 1 and 6.",perc,level)
+      print(f"cmdinfo executed by {u}: {com}")
   elif(com.startswith("/poll")):
-     c=com.split("/poll ")
+     c=com.split("/poll '")
      cc=c[1]
-     uploadGJComment(un,pw,f"POLL by {u}: '{cc}' Vote with likes and dislikes",perc,level)
+     d=com.split("/poll '" + cc + "' '")
+     dd=d[1]
+     uploadGJComment(un,pw,f"POLL by {u}: Like = '{cc}', Dislike = '{cc}'",perc,level)
      print(f"poll executed by {u}: {com}")
+  elif(com.startswith("/cmdinfo poll")):
+      uploadGJComment(un,pw,f"INFO: /poll will write a message with the options you added. ALWAYS enclose your options with '",perc,level)
+      print(f"cmdinfo executed by {u}: {com}")
   elif(com.startswith("/fart")):
      uploadGJComment(un,pw,f"@{u} farddddddddddddddd",perc,level)
      print(f"fart executed by {u}: {com}")
+  elif(com.startswith("/cmdinfo fart")):
+      uploadGJComment(un,pw,f"INFO: /fart will fart.",perc,level)
+      print(f"cmdinfo executed by {u}: {com}")
   elif(com.startswith("/rickroll")):
      c=com.split("/rickroll ")
      cc=c[1]
      uploadGJComment(un,pw,f"@{cc}, you got rickrolled by @{u}: Never gonna give you up,...",perc,level)
      print(f"rickroll executed by {u}: {com}")
+  elif(com.startswith("/cmdinfo rickroll")):
+      uploadGJComment(un,pw,f"INFO: /rickroll will post the rickroll lyrics and mentioning the specified user.",perc,level)
+      print(f"cmdinfo executed by {u}: {com}")
 lvl = lvlid
 while 1:
     try:
